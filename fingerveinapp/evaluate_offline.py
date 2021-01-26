@@ -9,7 +9,9 @@ from sklearn.metrics import roc_curve
 
 
 # All enroll are enrolled
-def evaluate_offline(featurePath="./pickle/record_feature_second.pkl", enrollPath="./pickle/enrolled_user.pkl", scorePath="./pickle/score.pkl", scoreMethodPath="./pickle/score_method.pkl", showPlot = True):
+def evaluate_offline(
+    featurePath="./pickle/record_feature_second.pkl", enrollPath="./pickle/enrolled_user.pkl", scorePath="./pickle/score.pkl", scoreMethodPath="./pickle/score_method.pkl", showPlot=True
+):
     if not os.path.exists(featurePath) or not os.path.exists(enrollPath):
         raise FileNotFoundError("Second session feature or enrolled feature not found")
     else:
@@ -20,15 +22,6 @@ def evaluate_offline(featurePath="./pickle/record_feature_second.pkl", enrollPat
 
         if len(record_feature) == 0 or len(enroll_feature) == 0:
             raise ValueError("Empty second session feature or enrolled feature")
-
-    # Pickle data print out
-    # for key, item in record_feature.items():
-    #     print(key, type(item), item.shape)
-
-    # for key, item in enroll_feature.items():
-    #     print(key)
-    #     for k, i in item.items():
-    #         print(k, i.shape)
 
     evaluate_score = {}
     score_method = {}
@@ -111,7 +104,7 @@ def plot_histogram(scores_match, scores_imposter, metrics=None, metrics_threds=N
     bins = np.linspace(0, np.pi, 300) * f
     angles_match = np.arccos(np.clip(scores_match, -1, 1)) * f
     angles_imposter = np.arccos(np.clip(scores_imposter, -1, 1)) * f
-    plt.subplot( num_of_method // 2, 2, index)
+    plt.subplot(num_of_method // 2, 2, index)
     plt.hist(angles_match, bins, alpha=0.5, fill=False, density=True, histtype="step", stacked=False, label="Genuine, mean={:.2f}".format(np.mean(angles_match)))
     plt.hist(angles_imposter, bins, alpha=0.5, fill=False, density=True, histtype="step", stacked=False, label="Imposter, mean={:.2f}".format(np.mean(angles_imposter)))
     if metrics_threds is not None:

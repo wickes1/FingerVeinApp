@@ -18,10 +18,6 @@ def enroll():
     else:
         with open("./pickle/enrolled_user.pkl", "rb") as f:
             enrolled_user = pickle.load(f)
-            # vidList = list(set(vidList) - set(db.keys()))
-            # if not vidList:
-            #     print("Empty video list, no record video or all video's features are extracted")
-            #     quit()
 
     for user, features in record_feature.items():
         print("enrolling {}".format(user))
