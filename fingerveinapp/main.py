@@ -18,6 +18,10 @@ from utils import make_folder
     default_size=(600, 600),
     required_cols=1,
     optional_cols=1,
+    progress_regex=r"^progress: (?P<current>\d+)/(?P<total>\d+)$",
+    progress_expr="current / total * 100",
+    hide_progress_msg=True,
+    timing_options={"show_time_remaining": True, "hide_time_remaining_on_complete": True},
 )
 def main():
     settings_msg = "Finger Vein App for Record/Enroll/Identify/Evaluation"

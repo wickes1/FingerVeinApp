@@ -26,12 +26,15 @@ def evaluate_offline(
     evaluate_score = {}
     score_method = {}
     num_of_method = len(enroll_feature)
-
+    process_progress = 0
     for method, item in enroll_feature.items():
         # Iterate every user
         y_score = np.array([])
         y_true = np.array([])
         scores_match = scores_imposter = np.array([])
+        print("Evaluating Method:", method)
+        print(f"progress: {process_progress}/{num_of_method}")
+        process_progress = process_progress + 1
         for enrollUser, enrollFeatures in item.items():
             genuine_list = np.array([])
             imposter_list = np.array([])
@@ -64,6 +67,7 @@ def evaluate_offline(
         fpr, tpr, thresholds = roc_curve(y_true, y_score)
         metrics, metrics_thred = compute_roc_metrics(fpr, tpr, thresholds)
 
+    print("Evaluation Completed. Drawing Metrics...")
     # Draw Roc
     plt.figure(figsize=(10, 6), dpi=120)
     for method, item in score_method.items():
