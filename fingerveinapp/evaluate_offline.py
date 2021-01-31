@@ -70,7 +70,7 @@ def evaluate_offline(
         fpr, tpr, thresholds = roc_curve(item["y_true"], item["y_score"])
         metrics, metrics_thred = compute_roc_metrics(fpr, tpr, thresholds)
         draw_roc(method, metrics[0], fpr, tpr)
-    plt.savefig("./evaluation_result/ROC.svg")
+    plt.savefig("./evaluation_result/Evaluate_ROC.svg")
     if showPlot:
         plt.show()
 
@@ -88,7 +88,7 @@ def evaluate_offline(
         print("scores_imposter min", np.amin(scores_imposter), "scores_imposter max", np.amax(scores_imposter))
         plot_histogram(scores_match, scores_imposter, metrics, metrics_thred, method, index, num_of_method=num_of_method)
         index = index + 1
-    plt.savefig("./evaluation_result/Histogram.svg")
+    plt.savefig("./evaluation_result/Evalute_Histogram.svg")
     if showPlot:
         plt.show()
 
