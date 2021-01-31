@@ -1,3 +1,6 @@
+import warnings
+
+warnings.filterwarnings("ignore")
 from gooey import Gooey, GooeyParser
 import numpy as np
 import pickle
