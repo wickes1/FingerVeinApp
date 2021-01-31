@@ -23,17 +23,28 @@ def template_FirstFrame_CosineSimilarity(features, num_of_template):
     return templateList
 
 
+from .single_template import single_template_averageAll
+
+
+def template_FirstFrame_CosineSimilarity_Average(features, num_of_template):
+    templateList = template_FirstFrame_CosineSimilarity(features, num_of_template)
+    return single_template_averageAll(templateList)
+
+
 def k_means(features, num_of_template):
     from sklearn.cluster import KMeans
+
     kmeans = KMeans(n_clusters=num_of_template)
     kmeans.fit(features)
     centers = kmeans.cluster_centers_
     return centers
 
+
 if __name__ == "__main__":
     features = np.random.rand(150, 512)
     import time
-    for i in range(1,6):
+
+    for i in range(1, 6):
         start = time.time()
         while np.any(np.isnan(features)):
             features = np.random.rand(150, 512)

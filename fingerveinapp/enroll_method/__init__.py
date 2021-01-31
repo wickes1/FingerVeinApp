@@ -1,5 +1,5 @@
 from enroll_method.single_template import single_template_firstFrame, single_template_averageAll
-from enroll_method.multi_template import template_FirstFrame_CosineSimilarity, k_means
+from enroll_method.multi_template import template_FirstFrame_CosineSimilarity, k_means, template_FirstFrame_CosineSimilarity_Average
 
 singleTemplateMethodList = [single_template_firstFrame, single_template_averageAll]
-mutliTemplateMethodList = [template_FirstFrame_CosineSimilarity, k_means]
+mutliTemplateMethodList = [template_FirstFrame_CosineSimilarity, k_means ,template_FirstFrame_CosineSimilarity_Average]
