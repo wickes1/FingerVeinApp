@@ -27,7 +27,7 @@ def template_FirstFrame_CosineSimilarity(features, num_of_template):
 
 def template_FirstFrame_CosineSimilarity_Average(features, num_of_template):
     templateList = template_FirstFrame_CosineSimilarity(features, num_of_template)
-    return single_template_averageAll(templateList)
+    return Single_Template_AverageAll(templateList)
 
 
 def k_means(features, num_of_template):
