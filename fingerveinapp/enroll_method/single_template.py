@@ -1,11 +1,11 @@
 import numpy as np
 
 
-def single_template_firstFrame(features):
+def Single_Template_FirstFrame(features):
     return np.expand_dims(features[0], axis=0)
 
 
-def single_template_averageAll(features):
+def Single_Template_AverageAll(features):
     return np.expand_dims(np.average(features, axis=0), axis=0)
 
 

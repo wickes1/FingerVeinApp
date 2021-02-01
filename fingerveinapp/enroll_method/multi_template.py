@@ -1,4 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
+from .single_template import Single_Template_AverageAll
+
 import numpy as np
 
 
@@ -23,9 +25,6 @@ def template_FirstFrame_CosineSimilarity(features, num_of_template):
     return templateList
 
 
-from .single_template import single_template_averageAll
-
-
 def template_FirstFrame_CosineSimilarity_Average(features, num_of_template):
     templateList = template_FirstFrame_CosineSimilarity(features, num_of_template)
     return single_template_averageAll(templateList)
@@ -37,6 +36,14 @@ def k_means(features, num_of_template):
     kmeans = KMeans(n_clusters=num_of_template)
     kmeans.fit(features)
     centers = kmeans.cluster_centers_
+    return centers
+
+
+def k_medoids(features, num_of_template):
+    from sklearn_extra.cluster import KMedoids
+
+    kmedoids = KMedoids(n_clusters=num_of_template, metric="euclidean").fit(features)
+    centers = kmedoids.cluster_centers_
     return centers
 
 
