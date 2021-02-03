@@ -12,7 +12,6 @@ def feature_extract(vidPath="./record/", pklPath="./pickle/record_feature.pkl"):
     for file in os.listdir(vidPath):
         if file.endswith(".avi"):
             vidList.append(file.split(".")[0])
-    vidList.sort()
 
     if not os.path.exists(pklPath):
         db = {}
@@ -23,7 +22,7 @@ def feature_extract(vidPath="./record/", pklPath="./pickle/record_feature.pkl"):
             if not vidList:
                 print("Empty video list, no record video or all video's features are already extracted")
                 return
-
+    vidList.sort()
     for user in vidList:
         cap = cv2.VideoCapture(vidPath + user + ".avi")
         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
