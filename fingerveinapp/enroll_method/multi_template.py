@@ -9,19 +9,27 @@ def template_FirstFrame_CosineSimilarity(features, num_of_template):
     templateList[0] = features[0]
     features = features[1:]
     index = 1
+    count = 0
+    fingerList = []
+    fingerList.append(0)
     while index < num_of_template:
+        finalCount = 0
+        count = 0
         diff_score = 1
         for feature in features:
+            count = count + 1
             score = 0
             for i in range(index):
                 x = np.expand_dims(templateList[i], axis=0)
                 y = np.expand_dims(feature, axis=0)
                 score = score + cosine_similarity(x, y)
             score /= len(templateList)
-            if score < diff_score:
+            if score < diff_score and not count in fingerList:
                 diff_score = score
                 templateList[index] = feature
+                finalCount = count
         index = index + 1
+        fingerList.append(finalCount)
     return templateList
 
 
