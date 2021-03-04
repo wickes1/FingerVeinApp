@@ -107,7 +107,7 @@ def main():
     tab4Group.add_argument("--FeatureExtract2", action="store_true", default=False, help="extract feature from record video 2nd session, save at ./pickle")
     tab4Group.add_argument("--Enrollment", action="store_true", default=False, help="Enroll 1st session feature, save at ./pickle")
     tab4Group.add_argument("--Evaluation", action="store_true", default=False, help="Evaluate all enrolled user with record video 2nd session, save at ./evaluation_result")
-    tab4Group.add_argument("--ShowPlot", action="store_true", default=True, help="Show ROC and Hist in Evaluation")
+    # tab4Group.add_argument("--ShowPlot", action="store_true", default=True, help="Show ROC and Hist in Evaluation")
     #################################################################################
     tab5 = subs.add_parser("PickleInfo")
     tab5Group = tab5.add_argument_group("Pickle information", description="Read info from enrolled_user/record_feature/record_feature_second")
