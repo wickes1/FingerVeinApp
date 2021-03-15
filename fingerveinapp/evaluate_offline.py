@@ -90,9 +90,9 @@ def evaluate_offline(
         scores_imposter = item["scores_imposter"]
         print("score_match min", np.amin(scores_match), "score_match max", np.amax(scores_match))
         print("scores_imposter min", np.amin(scores_imposter), "scores_imposter max", np.amax(scores_imposter))
-        plot_histogram(scores_match, scores_imposter, metrics, metrics_thred, method, index, num_of_method=num_of_method)
+        # plot_histogram(scores_match, scores_imposter, metrics, metrics_thred, method, index, num_of_method=num_of_method)
         index = index + 1
-    plt.savefig("./evaluation_result/Evalute_Histogram.svg")
+    # plt.savefig("./evaluation_result/Evalute_Histogram.svg")
     if showPlot:
         plt.show()
 
