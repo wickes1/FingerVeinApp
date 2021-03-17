@@ -1,6 +1,5 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from .single_template import Single_Template_AverageAll
-from .preprocessing import Preprocessing
 import numpy as np
 
 
@@ -43,7 +42,6 @@ def FirstFrame_CosineSimilarity_Average(features, num_of_template):
 def kMeansPreprocessed(features, num_of_template):
     from sklearn.cluster import KMeans
 
-    features = Preprocessing.OutlierRemoval.iso(features)
     kmeans = KMeans(n_clusters=num_of_template)
     kmeans.fit(features)
     centers = kmeans.cluster_centers_

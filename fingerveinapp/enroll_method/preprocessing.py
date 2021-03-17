@@ -1,40 +1,29 @@
 import numpy as np
+import pandas as pd
 
 
 class Preprocessing:
     class OutlierRemoval:
         def __init__(self):
-            self.method_list = [self.iso, self.ee, self.lof, self.svm]
-            self.index = 0
+            # self.method_list = [func for func in dir(OutlierRemoval) if callable(getattr(OutlierRemoval, func)) and not func.startswith("__")]
+            # self.method_list = [self.none, self.iso, self.ee, self.lof, self.svm, self.rrcf]
+            self.method_list = [self.none]
+            self.index = -1
 
         def __iter__(self):
-            return self.method_list[self.index]
+            return self
 
         def __next__(self):
-            if self.index < len(self.method_list):
+            if self.index < len(self.method_list) - 1:
                 self.index += 1
                 return self.method_list[self.index]
             else:
                 raise StopIteration
 
-        def __getitem__(self):
-            return self.method_list[self.index]
+        def none(self, features):
+            return features
 
-        # def __init__(self, max_num):
-        #     self.max_num = max_num
-        #     self.index = 0
-
-        # def __iter__(self):
-        #     return self
-
-        # def __next__(self):
-        #     self.index += 1
-        #     if self.index < self.max_num:
-        #         return self.index
-        #     else:
-        #         raise StopIteration
-
-        def iso(features):
+        def iso(self, features):
             from sklearn.ensemble import IsolationForest
 
             clf = IsolationForest(n_estimators=10, warm_start=True)
@@ -43,7 +32,7 @@ class Preprocessing:
             return features
 
         # Minimum Covariance Determinant
-        def ee(features):
+        def ee(self, features):
             from sklearn.covariance import EllipticEnvelope
 
             clf = EllipticEnvelope()
@@ -52,7 +41,7 @@ class Preprocessing:
             return features
 
         # Local Outlier Factor
-        def lof(features):
+        def lof(self, features):
             from sklearn.neighbors import LocalOutlierFactor
 
             clf = LocalOutlierFactor()
@@ -61,10 +50,27 @@ class Preprocessing:
             return features
 
         # One-Class SVM
-        def svm(features):
+        def svm(self, features):
             from sklearn.svm import OneClassSVM
 
             clf = OneClassSVM()
             prediction = clf.fit_predict(features)
             features = features[np.where(prediction != 1)]
+            return features
+
+        # Robust Random Cut Forest
+        def rrcf(self, features):
+            import rrcf
+
+            tree = rrcf.RCTree()
+            for i, f in enumerate(features):
+                tree.insert_point(f, index=i)
+            df = []
+            for i in range(len(features)):
+                df.append(tree.codisp(i))
+            df = pd.DataFrame(df, columns=["score"])
+            # print(df.describe())
+            low = df.quantile(0.25).item()
+            high = df.quantile(0.75).item()
+            features = features[(df["score"] > low) & (df["score"] < high)]
             return features
