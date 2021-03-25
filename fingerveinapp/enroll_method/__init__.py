@@ -4,6 +4,6 @@ from enroll_method.multi_template import kMeansPreprocessed
 from enroll_method.multi_template import dbscan, optics, meanShift
 from enroll_method.preprocessing import Preprocessing
 
-singleTemplateMethodList = []
+singleTemplateMethodList = [Single_Template_FirstFrame, Single_Template_AverageAll]
 # mutliTemplateMethodList = [kMeans, featureAgglomeration, miniBatchKMeans, spectralClustering, dbscan, optics, meanShift]
-mutliTemplateMethodList = [kMeans]
+mutliTemplateMethodList = [FirstFrame_CosineSimilarity, kMeans, kMedoids, featureAgglomeration, miniBatchKMeans, spectralClustering, dbscan, optics, meanShift]
