@@ -15,6 +15,7 @@ pip install -r requirements.txt
 ## Run the App
 
 ```
+cd fingerveinapp
 python main.py
 ```
 
